@@ -50,10 +50,7 @@ Private Function CopierColler()
     Dim lastr As Long
     Dim sh As Worksheet
     Dim Rn As Variant
-    Dim ExportBrut As Workbook
-    Dim NomFichier As Variant
         
-    Set ExportBrut = Workbooks.Open(NomFichier)
     Set sh = ExportBrut.Sheets("Export Brut")
         ExportBrut.Sheets("Export Brut").Range("Rn").Select
         ac = ActiveCell.Column
