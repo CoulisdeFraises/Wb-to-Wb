@@ -1,0 +1,63 @@
+Sub RemplissageTemplate()
+    
+    'Déclaration des variables
+    Dim ExportBrut As Workbook
+    Dim MonClasseur As Workbook
+    Dim NomFichier As Variant
+    
+    'Pour ne plus affichier les fenêtres à l'écran et exécuter le code plus rapidement
+    Set MonClasseur = ThisWorkbook
+    
+    Application.ScreenUpdating = False
+    
+    'Ouvrir le classeur contenant l'Export Brut
+    NomFichier = Application.GetOpenFilename(FileFilter:="Fichiers Excel (*.XLSX), *.XLSX", Title:="Selectionnez le fichier Export Brut")
+    If NomFichier = False Then Exit Sub
+    Set ExportBrut = Workbooks.Open(NomFichier)
+    
+    'Copier les données depuis l'Export Brut vers le template
+    ExportBrut.Sheets("Export Brut").Range("A2:A50000").Copy MonClasseur.Sheets("Template").Range("A2:A50000")
+    'ExportBrut.Sheets("Export Brut").Range("B2").Select
+    
+    CopierColler
+        Set Rn = B2
+
+        'Dim ac As Integer
+        'Dim lastr As Long
+        'Dim sh As Worksheet
+        
+       'Set sh = ExportBrut.Sheets("Export Brut")
+            'ExportBrut.Sheets("Export Brut").Range("B2").Select
+            'ac = ActiveCell.Column
+            'lastr = sh.Cells(Rows.Count, ac).End(xlUp).Row
+            'Range(Cells(2, ac), Cells(lastr, ac)).Copy MonClasseur.Sheets("Template").Range("B2")
+   
+    
+    'ExportBrut.Sheets("Export Brut").Range(Selection, Selection.End(xlDown)).Copy MonClasseur.Sheets("Template").Range("B2")
+    
+    'Rajouter ensuite les données que l'on souhaite dans le tableau
+    
+            
+    ExportBrut.Close False
+    
+    Application.ScreenUpdating = True
+    
+End Sub
+
+Private Function CopierColler()
+
+    Dim ac As Integer
+    Dim lastr As Long
+    Dim sh As Worksheet
+    Dim Rn As Variant
+    Dim ExportBrut As Workbook
+    Dim NomFichier As Variant
+        
+    Set ExportBrut = Workbooks.Open(NomFichier)
+    Set sh = ExportBrut.Sheets("Export Brut")
+        ExportBrut.Sheets("Export Brut").Range("Rn").Select
+        ac = ActiveCell.Column
+        lastr = sh.Cells(Rows.Count, ac).End(xlUp).Row
+        Range(Cells(2, ac), Cells(lastr, ac)).Copy MonClasseur.Sheets("Template").Range("Rn")
+
+End Function
